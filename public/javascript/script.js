@@ -2,7 +2,7 @@ var DATA = {
 	stores: [
 		{
 			title: '好棒棒藥妝店1',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?E9ru92',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -13,7 +13,7 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店2',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?sdkrew',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -24,7 +24,7 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?34grg',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -35,7 +35,7 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?dgew2',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -46,7 +46,7 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?dkojo',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -57,7 +57,7 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?dijj2n',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -68,7 +68,7 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
+			thumbnail:'http://loremflickr.com/100/100?E9ru92',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -79,32 +79,43 @@ var DATA = {
 		},
 	]
 }
+var storeMarkers = [];
+var user;
 // 
 var app = (function(){
 	var storeList;
 	function cacheDOM(){
 		storeList = $('.store-list');
+		storeItem = $('.js-store-list-item')
 	}
 	function renderStore(stores){
-		$.each(stores, function(key, store){
-			var li = _template(store.title, store.desc, store.url);
+		$.each(stores, function(index, store){
+			var li = _template(store.title, store.desc, store.url, store.thumbnail, index);
 			storeList.append(li);
 		})
 	}
-	function _template(title, desc, url){
-		var template = '<li><p>' + title + '</p><p>' + desc + '</p><p>' + url + '</p></li>';
+	function _template(title, desc, url, thumbnail, index){
+		var template = '<li class="store-list__item js-store-list-item" data-index="'+ index +'" style="background: url(' + thumbnail + ') center center; background-size: cover"><p class="title">' + title + '</p><p class="desc">' + desc + '</p><a href="' + url + '" class="url">看看</a></li>';
 		return template;
+	}
+	function eventBinding(){
+		console.log()
+		storeItem.hover(function(){
+			var idx = $(this).attr('data-index');
+			console.log(idx)
+		})
 	}
 	return {
 		cacheDOM: cacheDOM,
-		renderStore: renderStore
+		renderStore: renderStore,
+		eventBinding: eventBinding
 	}
 }())
 // 地圖模組
 var map = (function(){
 	var map = document.getElementById('map');
-	var storeMarkers = [];
-	var user;
+	// var storeMarkers = [];
+	// var user;
 	var userPhotoUrl = 'images/han.jpg'
 	var options ={
 		center: {lat: 25.038, lng: 121.53},
@@ -148,9 +159,9 @@ var map = (function(){
 $(document).ready(function(){
 	app.cacheDOM();
 	app.renderStore(DATA.stores);
+	app.cacheDOM();
+	app.eventBinding();
 	map.initMap();
 	map.showUser();
 	map.showStore(DATA.stores);
-	console.log(google.maps.Animation)
-
 })
