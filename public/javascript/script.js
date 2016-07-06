@@ -105,6 +105,7 @@ var map = (function(){
 	var map = document.getElementById('map');
 	var storeMarkers = [];
 	var user;
+	var userPhotoUrl = 'images/han.jpg'
 	var options ={
 		center: {lat: 25.038, lng: 121.53},
 		zoom: 14
@@ -115,8 +116,17 @@ var map = (function(){
 	function showStore(stores){
 		$.each(stores, function(idx, store){
 			(function(i){
-				setTimeout(_pushMarker.bind(null, store), 1000 + i * 500);
+				setTimeout(_pushMarker.bind(null, store), 1000 + i * 250);
 			}(idx))
+		})
+	}
+	function showUser() {
+		user = new google.maps.Marker({
+			map: map,
+			position: options.center,
+			animation: google.maps.Animation.BOUNCE,
+			draggable: true,
+			icon: userPhotoUrl
 		})
 	}
 	function _pushMarker(store){
@@ -129,7 +139,8 @@ var map = (function(){
 
 	return {
 		initMap: initMap,
-		showStore: showStore
+		showStore: showStore,
+		showUser: showUser
 	}
 }());
 
@@ -138,6 +149,7 @@ $(document).ready(function(){
 	app.cacheDOM();
 	app.renderStore(DATA.stores);
 	map.initMap();
+	map.showUser();
 	map.showStore(DATA.stores);
 	console.log(google.maps.Animation)
 
