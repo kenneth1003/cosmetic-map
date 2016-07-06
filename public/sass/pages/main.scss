@@ -1,0 +1,28 @@
+@import "../base/reset";
+
+.info-bar{
+	flex: 1
+}
+#map{
+	width: 100%;
+	flex: 8;
+}
+.store-list{
+	padding: 0;
+	margin: 0;
+	flex: 3;
+	box-sizing: border-box;
+	padding-top: 30px;
+	white-space: nowrap;
+	-ms-overflow-x: scroll;
+	    overflow-x: scroll;
+	-webkit-overflow-scrolling: touch;
+	
+}
+.store-list li{
+	display: inline-block;
+	border: 1px solid #ccc;
+	margin: 10px 5px;
+	padding: 10px
+}
+

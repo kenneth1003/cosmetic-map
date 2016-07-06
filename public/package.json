@@ -1,0 +1,11 @@
+{
+	"dependencies": {
+		"gulp": "*",
+		"gulp-sass": "*",
+		"gulp-rename": "*",
+		"gulp-cssmin": "*",
+		"gulp-cssbeautify": "*",
+		"gulp-autoprefixer": "*",
+		"browser-sync": "*"
+	}
+}

@@ -1,0 +1,74 @@
+@import "../utils/variables.scss";
+
+.carousel{
+	position: relative;
+	z-index: 0;	
+	overflow: hidden;
+	
+}
+.carousel__ctrl{
+	cursor: pointer;
+	background-color: $main-frame; 
+	position: absolute;
+	top:50%;
+	margin-top: -($square_small/2);
+	width: $square_small;
+	height: $square_small;
+	z-index:10;
+}
+.carousel__ctrl--left{
+	left: 0;
+	opacity: 0;
+	transition: all .3s;
+}
+.carousel__ctrl--left:after, .carousel__ctrl--left:before,.carousel__ctrl--right:after,.carousel__ctrl--right:before{
+	content:'';
+	position: absolute;
+	width: $square_small/3.5; 
+	border-top:2px solid #111;
+	top: calc(50% - 6px);
+	left: 50%;
+	margin-left: -($square_small/7);
+	transform: rotate(-40deg);
+}
+.carousel__ctrl--left:before{
+	top: calc(50% + 6px);
+	left: 50%;
+	transform: rotate(40deg);
+}
+.carousel__ctrl--right{
+	right: 0;
+	transition: all .3s;
+}
+.carousel__ctrl--right:after{
+	top: calc(50% + 6px);
+	left: 50%;
+	transform: rotate(-40deg);
+}
+.carousel__ctrl--right:before{
+	top: calc(50% - 6px);
+	left: 50%;
+	transform: rotate(40deg);
+}
+.carousel__container{
+	height: 100%; 
+	transition: transform .7s;
+	transform: translate(0,0);
+}
+.carousel__item{
+	position: relative;
+	height: 100%;
+	display: inline-block;
+	box-sizing:border-box;
+	vertical-align: top;
+	overflow: hidden; 
+	
+	img{
+		width: 100%;
+		height: 100%;
+		transition-property: none;
+	}
+} 
+.carousel__item__content{
+	position: absolute;
+}

@@ -1,0 +1,17 @@
+.phone{
+	padding: 60px 8px 100px;
+	border: 1px solid #ccc;
+	border-radius: 50px;
+	display: inline-block;
+}
+
+.container{
+	width: 405px;
+	height: 720px;
+	margin: 15px;
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}

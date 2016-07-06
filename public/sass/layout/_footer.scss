@@ -1,0 +1,9 @@
+@import "../utils/variables.scss";
+
+.footer{
+	position: fixed;
+	bottom: 0;
+	background-color: $main-frame;
+	height: 40px;
+	width: 100%; 
+}

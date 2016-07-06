@@ -1,0 +1,26 @@
+@import "../utils/variables";
+
+.mask{
+	background-color: rgba(0,0,0,.7) ;
+	display: none;
+	position: fixed;
+	overflow: hidden;
+	z-index: 10000;
+	height:100%;
+	width: 100%;  
+	top: 0;
+	left: 0;
+}
+
+
+.mask-small{
+	background-color: rgba(0,0,0,.5) ;
+	position: absolute;
+	height:100%;
+	width: 100%; 
+	opacity: 0;
+	z-index: 1; 
+}
+.mask-small:hover{ 
+	opacity: 1;
+}
