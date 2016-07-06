@@ -81,8 +81,72 @@ var DATA = {
 }
 var storeMarkers = [];
 var user;
+var userRadius;
 // 
-var app = (function(){
+// 地圖模組
+var map = (function(){
+	var map = document.getElementById('map');
+	// var storeMarkers = [];
+	// var user;
+	var userPhotoUrl = 'images/han.jpg'
+	var options ={
+		center: {lat: 25.038, lng: 121.53},
+		zoom: 14
+	}
+	var infoWindowTemplate = '<div>哈囉你好嗎</div>';
+	var infowindow = new google.maps.InfoWindow({
+	    content: infoWindowTemplate
+	});
+
+	function initMap() {
+	    map = new google.maps.Map(map, options);
+	}
+	function showStore(stores){
+		$.each(stores, function(idx, store){
+			(function(i){
+				setTimeout(_pushMarker.bind(null, store), 1000 + i * 250);
+			}(idx))
+		})
+	}
+	function showUser() {
+		user = new google.maps.Marker({
+			map: map,
+			position: options.center,
+			animation: google.maps.Animation.BOUNCE,
+			draggable: true,
+			icon: userPhotoUrl
+		})
+		userRadius = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.6,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.15,
+            map: map,
+            center: options.center,
+            radius: 2000
+          });
+	}
+	function showInfo(index){
+		infowindow.open(map, storeMarkers[index]);
+	}
+	function _pushMarker(store){
+		storeMarkers.push(new google.maps.Marker({
+			map: map,
+			position: store.location,
+			animation: google.maps.Animation.DROP
+		}))
+	}
+
+	return {
+		initMap: initMap,
+		showStore: showStore,
+		showUser: showUser,
+		showInfo: showInfo
+	}
+}());
+
+var app = (function(map){
 	var storeList;
 	function cacheDOM(){
 		storeList = $('.store-list');
@@ -104,56 +168,23 @@ var app = (function(){
 			var idx = $(this).attr('data-index');
 			console.log(idx)
 		})
+		storeItem.click(function(){
+			var idx = $(this).attr('data-index')
+			storeItem.removeClass('active');
+			$(this).addClass('active');
+			map.showInfo(idx);
+		})
+		// $(storeList).scroll(function(){
+		// 	console.log($(this).scrollLeft())
+		// })
 	}
 	return {
 		cacheDOM: cacheDOM,
 		renderStore: renderStore,
 		eventBinding: eventBinding
 	}
-}())
-// 地圖模組
-var map = (function(){
-	var map = document.getElementById('map');
-	// var storeMarkers = [];
-	// var user;
-	var userPhotoUrl = 'images/han.jpg'
-	var options ={
-		center: {lat: 25.038, lng: 121.53},
-		zoom: 14
-	}
-	function initMap() {
-	    map = new google.maps.Map(map, options);
-	}
-	function showStore(stores){
-		$.each(stores, function(idx, store){
-			(function(i){
-				setTimeout(_pushMarker.bind(null, store), 1000 + i * 250);
-			}(idx))
-		})
-	}
-	function showUser() {
-		user = new google.maps.Marker({
-			map: map,
-			position: options.center,
-			animation: google.maps.Animation.BOUNCE,
-			draggable: true,
-			icon: userPhotoUrl
-		})
-	}
-	function _pushMarker(store){
-		storeMarkers.push(new google.maps.Marker({
-			map: map,
-			position: store.location,
-			animation: google.maps.Animation.DROP
-		}))
-	}
+}(map))
 
-	return {
-		initMap: initMap,
-		showStore: showStore,
-		showUser: showUser
-	}
-}());
 
 
 $(document).ready(function(){
