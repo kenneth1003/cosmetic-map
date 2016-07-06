@@ -2,14 +2,11 @@
 <html>
 <head>
 	<meta charset="utf8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 	<title></title>
 	<link rel="stylesheet" type="text/css" href="css/min/main.min.css">
 	<link rel="stylesheet" type="text/css" href="css/min/mobile.min.css">
 	<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
-	<style type="text/css">
-
-	</style>
 </head>
 <body>
 	<div class="phone">
@@ -26,129 +23,5 @@
 	</div>
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD0XBUO5mIN2JFXM6Osz-KkNDymA8O-KwQ"></script>
-<script type="text/javascript">
-	var DATA = {
-		stores: [
-			{
-				title: '好棒棒藥妝店1',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.51,
-					lng: 121
-				}
-			},
-			{
-				title: '好棒棒藥妝店2',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.52,
-					lng: 121
-				}
-			},
-			{
-				title: '好棒棒藥妝店3',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.53,
-					lng: 121
-				}
-			},
-			{
-				title: '好棒棒藥妝店3',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.53,
-					lng: 121
-				}
-			},
-			{
-				title: '好棒棒藥妝店3',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.53,
-					lng: 121
-				}
-			},
-			{
-				title: '好棒棒藥妝店3',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.53,
-					lng: 121
-				}
-			},
-			{
-				title: '好棒棒藥妝店3',
-				thumbnail:'http://www.fakenamegenerator.com/dummyimage/60x60/CCCCCC/000000/1 ',
-				desc:'好棒棒',
-				url: 'https://tw.yahoo.com',
-				likes: '123' ,
-				location: {
-					lat: 23.53,
-					lng: 121
-				}
-			},
-		]
-	}
-
-	var app = (function(){
-		var storeList;
-		function cacheDOM(){
-			storeList = $('.store-list');
-		}
-		function renderStore(stores){
-			$.each(stores, function(key, store){
- 				var li = _template(store.title, store.desc, store.url);
-				storeList.append(li);
-
-				// storeList.append();
-			})
-		}
-		function _template(title, desc, url){
-			var template = '<li><p>' + title + '</p><p>' + desc + '</p><p>' + url + '</p></li>';
-			return template;
-		}
-		return {
-			cacheDOM: cacheDOM,
-			renderStore: renderStore
-		}
-	}())
-	var map = (function(){
-		var map;
-    	function initMap() {
-    		console.log(google)
-	        map = new google.maps.Map(document.getElementById('map'), {
-	          center: {lat: -34.397, lng: 150.644},
-	          zoom: 8
-	        });
-	    }
-
-        return {
-        	initMap: initMap
-        }
-	}());
-	$(document).ready(function(){
-		app.cacheDOM();
-		app.renderStore(DATA.stores);
-		map.initMap();
-	})
-</script>
+<script type="text/javascript" src="javascript/script.js"></script>
 </html>
