@@ -88,7 +88,8 @@ var map = (function(){
 	var map = document.getElementById('map');
 	// var storeMarkers = [];
 	// var user;
-	var userPhotoUrl = 'images/han.jpg'
+	var userPhotoUrl = 'images/user.png';
+	var storePhotoUrl= 'images/store.png';
 	var options ={
 		center: {lat: 25.038, lng: 121.53},
 		zoom: 14
@@ -125,7 +126,9 @@ var map = (function(){
             map: map,
             center: options.center,
             radius: 2000
-          });
+        });
+        setTimeout(user.setAnimation.bind(user, null), 5700);
+
 	}
 	function showInfo(index){
 		infowindow.open(map, storeMarkers[index]);
@@ -134,7 +137,8 @@ var map = (function(){
 		storeMarkers.push(new google.maps.Marker({
 			map: map,
 			position: store.location,
-			animation: google.maps.Animation.DROP
+			animation: google.maps.Animation.DROP,
+			icon: storePhotoUrl
 		}))
 	}
 
@@ -174,9 +178,9 @@ var app = (function(map){
 			$(this).addClass('active');
 			map.showInfo(idx);
 		})
-		// $(storeList).scroll(function(){
-		// 	console.log($(this).scrollLeft())
-		// })
+		$(storeList).scroll(function(){
+			console.log($(this).scrollRight())
+		})
 	}
 	return {
 		cacheDOM: cacheDOM,
