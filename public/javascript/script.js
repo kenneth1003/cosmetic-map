@@ -114,9 +114,8 @@ var map = (function(){
 	}
 	function showStore(stores){
 		$.each(stores, function(idx, store){
-			console.log(idx);
 			(function(i){
-				setTimeout(_pushMarker.bind(null, store), i * 300);
+				setTimeout(_pushMarker.bind(null, store), 1000 + i * 500);
 			}(idx))
 		})
 	}
@@ -140,5 +139,6 @@ $(document).ready(function(){
 	app.renderStore(DATA.stores);
 	map.initMap();
 	map.showStore(DATA.stores);
+	console.log(google.maps.Animation)
 
 })
