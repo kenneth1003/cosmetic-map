@@ -95,10 +95,11 @@ var map = (function(){
 	var storePhotoUrl= 'images/store.png';
 	var options ={
 		center: {lat: 25.038, lng: 121.53},
-		zoom: 14
+		zoom: 14,
+		disableDefaultUI: true
 	}
 	function infoWindowTemplate(meter) {
-		return '<div>距離'+ meter +'公尺</div>';
+		return '<div>距離約 '+ meter +' 公尺<br/>步行約' + Math.floor(meter / 60) + '分鐘</div>';
 	};
 	function setInfowindow(meter){
 		infoWindow = new google.maps.InfoWindow({
@@ -173,7 +174,7 @@ var map = (function(){
 	        Math.cos(rad(p1.position.lat())) * Math.cos(rad(p2.position.lat())) *
 	        Math.sin(dLong / 2) * Math.sin(dLong / 2);
 	    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-	    var d = R * c;
+	    var d = Math.floor(R * c / 100) * 100;
 	    function rad(x) {
 		    return x * Math.PI / 180;
 		};
@@ -216,16 +217,16 @@ var app = (function(map){
 	}
 	function eventBinding(){
 		storeItem.click(function(){
-			// var idx = $(this).attr('data-index');
-			// markerFocuse(idx);
+			var idx = $(this).attr('data-index');
+			markerFocuse(idx);
 
 		})
-		$(storeList).scroll(function(){
-			var scrollLeft = $(this).scrollLeft();
-			checkScrollposition(scrollLeft);
-			var indecatorPos = indicatorMoveRatio * scrollLeft;
-			indicator.css('transform', 'translateX(' + indecatorPos + 'px)');
-		})
+		// $(storeList).scroll(function(){
+		// 	var scrollLeft = $(this).scrollLeft();
+		// 	checkScrollposition(scrollLeft);
+		// 	var indecatorPos = indicatorMoveRatio * scrollLeft;
+		// 	indicator.css('transform', 'translateX(' + indecatorPos + 'px)');
+		// })
 	}
 	function markerFocuse(idx){
 		storeItem.removeClass('active');
