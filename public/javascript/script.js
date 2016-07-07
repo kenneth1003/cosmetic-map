@@ -246,12 +246,12 @@ var app = (function(map){
 			nav.removeClass('active');
 			mask.fadeOut(200);
 		})
-		// $(storeList).scroll(function(){
-		// 	var scrollLeft = $(this).scrollLeft();
-		// 	checkScrollposition(scrollLeft);
-		// 	var indecatorPos = indicatorMoveRatio * scrollLeft;
-		// 	indicator.css('transform', 'translateX(' + indecatorPos + 'px)');
-		// })
+		$(storeList).scroll(function(){
+			var scrollLeft = $(this).scrollLeft();
+			checkScrollposition(scrollLeft);
+			// var indecatorPos = indicatorMoveRatio * scrollLeft;
+			// indicator.css('transform', 'translateX(' + indecatorPos + 'px)');
+		})
 	}
 	function markerFocus(idx){
 		storeItem.removeClass('active');
