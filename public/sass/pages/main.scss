@@ -2,15 +2,22 @@
 // $frame-color: #888;
 $frame-color: #34a853 + 30;
 $frame-width: 2px;
+body, .pure-g [class *="pure-u"] {font-family: 'Dosis','Microsoft JhengHei',\5FAE\8EDF\6B63\9ED1\9AD4,\65B0\7D30\660E\9AD4,'STHeiti',sans-serif;}
+
 .container{
 	position: relative;
 	background-color: #fafafa; 
 }
 .info-bar{
-	flex: 1;
-	background-color: $frame-color;
-	color: #f1f1f1;  
-	// box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+	// flex: 1;
+	background-color: #fff;
+	box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+	color: #ff5a5f;
+	position: absolute;
+	padding: 8px 8px 8px 50px;
+	top: 0; 	
+	width: 100%;
+	z-index: 1;
 }
 #map{
 	width: 100%;
@@ -32,9 +39,11 @@ $frame-width: 2px;
 .store-list{
 	padding: 0;
 	margin: 0;
-	flex: 2;
-	padding: 0 5px;
-	margin-right: 10px;
+	// flex: 2;
+	padding: 6px 3px;
+	background-color: #fff; 
+	position: absolute;
+	// margin-right: 10px;
 	// background-color: $frame-color; 
 	box-sizing: border-box;
 	white-space: nowrap;
@@ -43,15 +52,15 @@ $frame-width: 2px;
 	-webkit-overflow-scrolling: touch;
 	display: flex;
 	position: relative;
-	z-index: 1000;
-	
+	width: 100%; 
+	z-index: 98;
+	box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
 }
 .store-list li{
 	border-radius: 3px;
 	display: inline-block;
-	border: 3px solid #ccc;
-	margin: 0 5px 10px;
-	// box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 0px 2px 2px rgba(0, 0, 0, 0.098), 0px 0px 5px 1px rgba(0, 0, 0, 0.084);
+	// border: 6px solid #fff;
+	margin: 0 3px;
 	padding: 10px;
 	min-width: 130px;
 	position: relative;
@@ -94,8 +103,8 @@ $frame-width: 2px;
 	left: 0;
 	padding: 3px 10px 3px 3px;
 	display: inline-block;
-	background-color: #000;
-	color: #fff;
+	background-color: rgba(255,255,255,.8);
+	color: #555;
 	opacity: 1;
 	visibility: visible;
 	transition: all .5s;
@@ -110,7 +119,7 @@ $frame-width: 2px;
 	text-align: left;
 }
 .store-list .url{
-	background-color: $frame-color - 30; 
+	background-color: #ff5a5f; 
 	border-radius: 50%;
 	color: #fff;
 	visibility: hidden;
@@ -124,5 +133,68 @@ $frame-width: 2px;
 	justify-content: center;
 	align-items: center;
 	transform: scale(0, 0) translateY(100px);
-
 }
+
+.mask{
+	background-color: rgba(0,0,0, .5); 
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: absolute;
+	z-index: 99;  
+}
+.nav{
+	position: absolute;
+	height: 100%;
+	width: 220px;
+	z-index: 99;
+	background-color: #FFF; 
+	transform: translateX(-220px);
+	transition : transform .4s;
+	&.active{
+		transform: translateX(0);
+	}
+}
+.main-frame__nav-toggle{
+	cursor: pointer;
+	height: 34px;
+	z-index: 100;
+}
+.main-frame__nav-toggle__bar{
+	position: absolute;
+	width: 25px; 
+	border-top: 2px solid #666;
+	left: 0;
+	top: 20px;
+	margin-left: 12.5px;
+	transition: all .3s;
+	z-index: 100;
+	// height: 34px;		
+}
+.main-frame__nav-toggle__bar--top{
+	top: calc(18px - 8px)
+}
+.main-frame__nav-toggle__bar--mid{
+	top: calc(18px - 2px)
+}
+.main-frame__nav-toggle__bar--bottom{
+	top: calc(17px + 5px)
+}
+
+.close .main-frame__nav-toggle__bar--top{
+	transform: rotate(-45deg);
+	top: calc(18px - 3px)
+}
+.close .main-frame__nav-toggle__bar--mid{
+	opacity: 0;
+	top: calc(18px - 2px)
+}
+.close .main-frame__nav-toggle__bar--bottom{
+	transform: rotate(45deg);
+	top: calc(18px - 3px)
+}
+
+
+
+
+

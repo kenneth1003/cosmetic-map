@@ -2,7 +2,8 @@ var DATA = {
 	stores: [
 		{
 			title: '好棒棒藥妝店1',
-			thumbnail:'http://lorempixel.com/300/200?E9ru92',
+			// thumbnail:'http://lorempixel.com/300/200?E9ru92',
+			thumbnail:'/images/placeholder.png?E9ru92',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -13,7 +14,8 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店2',
-			thumbnail:'http://lorempixel.com/300/200?sdkrew',
+			// thumbnail:'http://lorempixel.com/300/200?sdkrew',
+			thumbnail:'/images/placeholder.png?sdkrew',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -24,7 +26,8 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://lorempixel.com/300/200?34grg',
+			// thumbnail:'http://lorempixel.com/300/200?34grg',
+			thumbnail:'/images/placeholder.png?34grg',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -35,7 +38,8 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://lorempixel.com/300/200?dgew2',
+			// thumbnail:'http://lorempixel.com/300/200?dgew2',
+			thumbnail:'/images/placeholder.png?dgew2',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -46,7 +50,8 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://lorempixel.com/300/200?dkojo',
+			// thumbnail:'http://lorempixel.com/300/200?dkojo',
+			thumbnail:'/images/placeholder.png?dkojo',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -57,7 +62,8 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://lorempixel.com/300/200?dijj2n',
+			// thumbnail:'http://lorempixel.com/300/200?dijj2n',
+			thumbnail:'/images/placeholder.png?dijj2n',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -68,7 +74,8 @@ var DATA = {
 		},
 		{
 			title: '好棒棒藥妝店3',
-			thumbnail:'http://lorempixel.com/300/200?E9ru92',
+			// thumbnail:'http://lorempixel.com/300/200?E9ru92',
+			thumbnail:'/images/placeholder.png?E9ru92',
 			desc:'好棒棒',
 			url: 'https://tw.yahoo.com',
 			likes: '123' ,
@@ -96,7 +103,11 @@ var map = (function(){
 	var options ={
 		center: {lat: 25.038, lng: 121.53},
 		zoom: 14,
-		disableDefaultUI: true
+		disableDefaultUI: true,
+		zoomControl: true,
+          zoomControlOptions: {
+              position: google.maps.ControlPosition.RIGHT_CENTER
+          }
 	}
 	function infoWindowTemplate(meter) {
 		return '<div>距離約 '+ meter +' 公尺<br/>步行約' + Math.floor(meter / 60) + '分鐘</div>';
@@ -113,7 +124,7 @@ var map = (function(){
 	function showStore(stores){
 		$.each(stores, function(idx, store){
 			(function(i){
-				setTimeout(_pushMarker.bind(null, store), 1000 + i * 250);
+				setTimeout(_pushMarker.bind(null, store), 600 + i * 200);
 			}(idx))
 		})
 	}
@@ -133,10 +144,10 @@ var map = (function(){
 	function _drawRadius(location, radius){
 		userRadius ? userRadius.setMap(null) : ''
 		userRadius = new google.maps.Circle({
-            strokeColor: '#FF0000',
+            strokeColor: '#ff5a5f',
             strokeOpacity: 0.6,
             strokeWeight: 2,
-            fillColor: '#FF0000',
+            fillColor: '#ff5a5f',
             fillOpacity: 0.15,
             map: map,
             center: location,
@@ -200,10 +211,14 @@ var app = (function(map){
 	var initialScrollRight;
 	var inicatorRange;
 	var indicatorMoveRatio;
+	var nav;
 	function cacheDOM(){
 		storeList = $('.store-list');
 		storeItem = $('.js-store-list-item');
 		indicator = $('.indicator');
+		navToggle = $('.js-nav-toggle');
+		mask      = $('.mask');
+		nav 	  = $('.nav');
 	}
 	function renderStore(stores){
 		$.each(stores, function(index, store){
@@ -212,14 +227,24 @@ var app = (function(map){
 		})
 	}
 	function _template(store, index){
-		var template = '<li class="store-list__item js-store-list-item" data-lng="' + store.lng + '" data-lat="' + store.lat + '" data-index="'+ index +'" style="background: url(' + store.thumbnail + ') center center; background-size: cover"><p class="title">' + store.title + '</p><p class="desc">' + store.desc + '</p><a href="' + store.url + '" class="url">看看</a></li>';
+		var template = '<li class="store-list__item js-store-list-item" data-lng="' + store.lng + '" data-lat="' + store.lat + '" data-index="'+ index +'" style="background: url(' + store.thumbnail + ') center center; background-size: cover"><p class="title">' + store.title + '</p><p class="desc">' + store.desc + '</p><a href="' + store.url + '" class="url">去看</a></li>';
 		return template;
 	}
 	function eventBinding(){
 		storeItem.click(function(){
 			var idx = $(this).attr('data-index');
-			markerFocuse(idx);
+			markerFocus(idx);
 
+		})
+		navToggle.click(function(){
+			navToggle.toggleClass('close');
+			nav.toggleClass('active');
+			mask.fadeToggle(200);
+		})
+		mask.click(function(){
+			navToggle.removeClass('close');
+			nav.removeClass('active');
+			mask.fadeOut(200);
 		})
 		// $(storeList).scroll(function(){
 		// 	var scrollLeft = $(this).scrollLeft();
@@ -228,7 +253,7 @@ var app = (function(map){
 		// 	indicator.css('transform', 'translateX(' + indecatorPos + 'px)');
 		// })
 	}
-	function markerFocuse(idx){
+	function markerFocus(idx){
 		storeItem.removeClass('active');
 		$(storeItem[idx]).addClass('active');
 		map.showInfo(idx, map.getDistance(user, storeMarkers[idx]));
@@ -238,7 +263,7 @@ var app = (function(map){
 		var modulus = Math.floor(pos / step);
 		console.log(modulus)
 		if(currentActiveMarker !== modulus){
-			markerFocuse(modulus);
+			markerFocus(modulus);
 		}
 	}
 	function init(){
@@ -248,7 +273,8 @@ var app = (function(map){
 		initialScrollRight = (itemWidth * itemLength - deviceWidth);
 		step =  initialScrollRight / itemLength;
 		indicatorRange = deviceWidth - 140;
-		indicatorMoveRatio = indicatorRange / initialScrollRight
+		indicatorMoveRatio = indicatorRange / initialScrollRight;
+		setTimeout(markerFocus.bind(this, 0), 3000);
 	}
 	return {
 		cacheDOM: cacheDOM,
